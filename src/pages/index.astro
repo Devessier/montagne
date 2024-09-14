@@ -6,7 +6,7 @@ import Card from "../components/Card.astro";
 ---
 
 <Layout title="Montagne">
-  <main>
+  <main class="bg-slate-50">
     <div
       class="grid grid-cols-1 grid-rows-1 [&>*]:row-start-1 [&>*]:col-start-1 h-screen overflow-hidden"
     >
@@ -34,6 +34,7 @@ import Card from "../components/Card.astro";
         </p>
 
         <a
+          href="#journal"
           class="text-white inline-flex font-semibold items-center gap-x-1 px-4 py-2 border-2 border-white rounded transition-colors hover:text-sky-300/90 hover:border-sky-300/90 cursor-pointer"
         >
           Découvrir
@@ -57,9 +58,34 @@ import Card from "../components/Card.astro";
       <!-- style="clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 83% 100%, 80% 99%, 78% 100%, 75% 97%, 69% 99%, 62% 100%, 60% 100%, 53% 95%, 51% 95%, 49% 93%, 39% 100%, 35% 97%, 32% 96%, 28% 98%, 19.6% 100%, 0% 100%); -->
       <div
         style="clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 100% 99%, 95.27% 96.36%, 91.61% 98.75%, 87.38% 93.57%, 77.92% 97.86%, 70.74% 99.41%, 62.58% 97.49%, 52.68% 89.29%, 49.53% 89.29%, 46.37% 85%, 29.9% 97.13%, 24.29% 93.57%, 19.56% 91.43%, 13.25% 95.71%, 0% 99%);"
-        class="bg-white"
+        class="bg-slate-50"
       >
       </div>
     </div>
+
+    <section id="journal" class="mx-auto max-w-7xl px-4 py-16">
+      <h2 class="text-6xl font-bold text-center mb-6 text-slate-900">
+        Journal
+      </h2>
+
+      <p
+        class="text-slate-900 mb-16 text-center text-xl mx-auto w-full max-w-lg"
+      >
+        Je documente ma découverte de ces nouveaux espaces pour garder une trace
+        de mon évolution.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        {
+          Array.from({ length: 12 }).map(() => (
+            <article class="p-4 rounded-md border border-slate-300 bg-white hover:border-slate-500 transition">
+              <h3 class="text-lg font-semibold leading-snug">
+                Trek autour des glaciers de la Vanoise (août 2024)
+              </h3>
+            </article>
+          ))
+        }
+      </div>
+    </section>
   </main>
 </Layout>
