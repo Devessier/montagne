@@ -16,26 +16,23 @@ import Card from "../components/Card.astro";
       />
 
       <div
-        class="bg-gradient-to-t from-slate-900/20 via-slate-900/10 via-40% h-full w-full"
+        class="self-center lg:self-end pt-8 px-4 lg:p-0 justify-self-center lg:justify-self-start flex flex-col items-start lg:pb-12 lg:pl-12 [&>*]:-mb-[8px] [&>*]:last:mb-0"
       >
-      </div>
-
-      <div
-        class="self-center max-w-4xl px-4 md:px-2 justify-self-center w-full"
-      >
-        <h2 class="font-semibold text-slate-100 text-5xl drop-shadow-xl mb-4">
+        <h2
+          class="font-semibold text-slate-900 text-3xl lg:text-5xl bg-white p-4 md:py-4 md:px-6 border-8 border-slate-900 mr-4 text-balance"
+        >
           Mes aventures en montagne
         </h2>
 
         <p
-          class="text-slate-100 text-lg max-w-xl font-medium drop-shadow-xl mb-8"
+          class="text-slate-900 lg:text-lg font-medium bg-white p-4 md:py-4 md:px-6 border-8 border-slate-900 text-balance"
         >
           Randonnée. Escalade. Alpinisme. Mon carnet de voyage en montagne.
         </p>
 
         <a
           href="#journal"
-          class="text-white inline-flex font-semibold items-center gap-x-1 px-4 py-2 border-2 border-white rounded transition-colors hover:text-sky-300/90 hover:border-sky-300/90 cursor-pointer"
+          class="inline-flex items-center gap-x-2 self-end p-4 md:py-4 md:px-6 bg-white border-8 border-slate-900 font-medium"
         >
           Découvrir
 
@@ -45,46 +42,58 @@ import Card from "../components/Card.astro";
             viewBox="0 0 24 24"
             stroke-width="2"
             stroke="currentColor"
-            class="size-5"
+            class="size-4"
           >
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
-              d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"></path>
+              d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3"></path>
           </svg>
         </a>
       </div>
 
-      <!-- style="clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 83% 100%, 80% 99%, 78% 100%, 75% 97%, 69% 99%, 62% 100%, 60% 100%, 53% 95%, 51% 95%, 49% 93%, 39% 100%, 35% 97%, 32% 96%, 28% 98%, 19.6% 100%, 0% 100%); -->
       <div
-        style="clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 100% 99%, 95.27% 96.36%, 91.61% 98.75%, 87.38% 93.57%, 77.92% 97.86%, 70.74% 99.41%, 62.58% 97.49%, 52.68% 89.29%, 49.53% 89.29%, 46.37% 85%, 29.9% 97.13%, 24.29% 93.57%, 19.56% 91.43%, 13.25% 95.71%, 0% 99%);"
-        class="bg-slate-50"
+        class="self-end lg:self-auto lg:justify-self-end grid grid-rows-1 grid-cols-[1fr,auto] lg:grid-rows-[1fr,auto] lg:grid-cols-[min-content] border-t-8 lg:border-0 lg:border-l-8 border-slate-900"
       >
+        <div class="relative">
+          <img
+            src="/approche-glacier.jpeg"
+            class="absolute object-right-bottom w-full h-full object-cover bg-white"
+          />
+        </div>
+
+        <p
+          class="lg:[writing-mode:vertical-lr] max-h-fit lg:rotate-180 bg-white text-slate-900 px-4 py-4 text-xl font-medium lg:border-b-8 border-slate-900"
+        >
+          Baptiste Devessier
+        </p>
       </div>
     </div>
 
-    <section id="journal" class="mx-auto max-w-7xl px-4 py-16">
-      <h2 class="text-6xl font-bold text-center mb-6 text-slate-900">
-        Journal
-      </h2>
+    <section id="journal" class="border-t-8 border-slate-900">
+      <div class="mx-auto max-w-7xl px-4 py-16">
+        <h2 class="text-6xl font-bold text-center mb-6 text-slate-900">
+          Journal
+        </h2>
 
-      <p
-        class="text-slate-900 mb-16 text-center text-xl mx-auto w-full max-w-lg"
-      >
-        Je documente ma découverte de ces nouveaux espaces pour garder une trace
-        de mon évolution.
-      </p>
+        <p
+          class="text-slate-900 mb-16 text-center text-xl mx-auto w-full max-w-lg"
+        >
+          Je documente ma découverte de ces nouveaux espaces pour garder une
+          trace de mon évolution.
+        </p>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-        {
-          Array.from({ length: 12 }).map(() => (
-            <article class="p-4 rounded-md border border-slate-300 bg-white hover:border-slate-500 transition">
-              <h3 class="text-lg font-semibold leading-snug">
-                Trek autour des glaciers de la Vanoise (août 2024)
-              </h3>
-            </article>
-          ))
-        }
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+          {
+            Array.from({ length: 12 }).map(() => (
+              <article class="p-4 rounded-md border border-slate-300 bg-white hover:border-slate-500 transition">
+                <h3 class="text-lg font-semibold leading-snug">
+                  Trek autour des glaciers de la Vanoise (août 2024)
+                </h3>
+              </article>
+            ))
+          }
+        </div>
       </div>
     </section>
   </main>
