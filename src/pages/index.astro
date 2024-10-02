@@ -8,15 +8,11 @@ import Card from "../components/Card.astro";
 <Layout title="Montagne">
   <main class="bg-slate-50">
     <div
-      class="grid grid-cols-1 grid-rows-1 [&>*]:row-start-1 [&>*]:col-start-1 h-screen overflow-hidden"
+      class="grid grid-rows-[1fr,auto] grid-cols-1 lg:grid-rows-1 lg:grid-cols-[1fr,auto] min-h-svh overflow-hidden bg-cover bg-center"
+      style="background-image: url('/approche-glacier.jpeg');"
     >
-      <img
-        src="/approche-glacier.jpeg"
-        class="object-cover object-center self-center h-full w-full bg-white"
-      />
-
       <div
-        class="self-center lg:self-end pt-8 px-4 lg:p-0 justify-self-center lg:justify-self-start flex flex-col items-start lg:pb-12 lg:pl-12 [&>*]:-mb-[8px] [&>*]:last:mb-0"
+        class="self-center lg:self-end px-4 py-4 lg:p-0 justify-self-center lg:justify-self-start flex flex-col items-start lg:pb-12 lg:pl-12 lg:mr-8 [&>*]:-mb-[8px] [&>*]:last:mb-0"
       >
         <h2
           class="font-semibold text-slate-900 text-3xl lg:text-5xl bg-white p-4 md:py-4 md:px-6 border-8 border-slate-900 mr-4 text-balance"
@@ -55,41 +51,102 @@ import Card from "../components/Card.astro";
       <div
         class="self-end lg:self-auto lg:justify-self-end grid grid-rows-1 grid-cols-[1fr,auto] lg:grid-rows-[1fr,auto] lg:grid-cols-[min-content] border-t-8 lg:border-0 lg:border-l-8 border-slate-900"
       >
-        <div class="relative">
-          <img
-            src="/approche-glacier.jpeg"
-            class="absolute object-right-bottom w-full h-full object-cover bg-white"
-          />
+        <div
+          class="bg-right-bottom bg-cover bg-white"
+          style="background-image: url('/approche-glacier.jpeg');"
+        >
         </div>
 
         <p
           class="lg:[writing-mode:vertical-lr] max-h-fit lg:rotate-180 bg-white text-slate-900 px-4 py-4 text-xl font-medium lg:border-b-8 border-slate-900"
         >
           Baptiste Devessier
+
+          <span class="pr-[env(safe-area-inset-right)]"></span>
         </p>
       </div>
     </div>
 
-    <section id="journal" class="border-t-8 border-slate-900">
-      <div class="mx-auto max-w-7xl px-4 py-16">
-        <h2 class="text-6xl font-bold text-center mb-6 text-slate-900">
-          Journal
-        </h2>
+    <section
+      id="journal"
+      class="border-t-8 border-slate-900 pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]"
+    >
+      <div class="mx-auto max-w-7xl px-4 pb-16 flex flex-col">
+        <div
+          class="grid [grid-template-areas:'image1'_'title'_'image2'] lg:[grid-template-areas:'image1_image1_._._.'_'._title_title_title_.'_'._._._image2_image2'] lg:grid-cols-[1fr,2rem,1fr,2rem,1fr] py-16"
+        >
+          <div
+            class="bg-center bg-cover bg-white border-8 border-slate-900 h-32 lg:h-44"
+            style="grid-area: image1; background-image: url('/glacier-face-italie.jpeg');"
+          >
+          </div>
+
+          <h2
+            class="text-4xl lg:text-6xl font-bold text-center text-slate-900 border-y-8 border-slate-900 py-4 -my-[8px]"
+            style="grid-area: title;"
+          >
+            Journal
+          </h2>
+
+          <div
+            class="bg-top bg-cover bg-white border-8 border-slate-900 h-32 lg:h-44"
+            style="grid-area: image2; background-image: url('/vallee-chaviere-moriond.jpeg');"
+          >
+          </div>
+        </div>
 
         <p
-          class="text-slate-900 mb-16 text-center text-xl mx-auto w-full max-w-lg"
+          class="text-slate-900 text-center text-xl mx-auto w-full max-w-lg font-medium mt-8 border-x-[6px] border-slate-900 px-4 py-4"
         >
           Je documente ma découverte de ces nouveaux espaces pour garder une
           trace de mon évolution.
         </p>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 grid-flow-row-dense gap-6 mt-24"
+        >
           {
-            Array.from({ length: 12 }).map(() => (
-              <article class="p-4 rounded-md border border-slate-300 bg-white hover:border-slate-500 transition">
-                <h3 class="text-lg font-semibold leading-snug">
-                  Trek autour des glaciers de la Vanoise (août 2024)
-                </h3>
+            Array.from({ length: 12 }).map((_, index) => (
+              <article
+                class:list={[
+                  "border-4 border-slate-900 bg-white hover:bg-slate-50 transition",
+                  index % 3 === 0
+                    ? "grid grid-rows-2 grid-cols-1 md:col-span-2 md:grid-rows-1 md:grid-cols-2"
+                    : "",
+                ]}
+              >
+                <div class="p-4 flex flex-col gap-y-4 h-full">
+                  <p class="font-medium px-2 py-1 self-start text-slate-50 bg-slate-900">
+                    {index % 3 === 0 ? "Voyage" : "Note"}
+                  </p>
+
+                  <h3 class="text-2xl font-semibold leading-snug text-slate-900 line-clamp-2">
+                    Trek autour des glaciers de la Vanoise (août 2024)
+                  </h3>
+
+                  <p class="text-slate-800 line-clamp-3 text-lg">
+                    Progressive Web Apps (PWAs) are now a viable option for
+                    providing a mobile experience that meets users’ high
+                    expectations. This article provides an introduction to the
+                    history of PWAs for those new to the topic, as well as what
+                    can be expected from them in 2024. We also look at where
+                    PWAs sit in the mobile landscape and how they can be a
+                    practical stepping stone towards a native application
+                    experience in the future.
+                  </p>
+
+                  <p class="text-slate-800 flex grow items-end font-semibold text-sm">
+                    Août 2024
+                  </p>
+                </div>
+
+                {index % 3 === 0 ? (
+                  <img
+                    src="/approche-glacier.jpeg"
+                    alt=""
+                    class="object-cover object-right-bottom bg-white h-full"
+                  />
+                ) : null}
               </article>
             ))
           }
