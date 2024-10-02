@@ -1,8 +1,14 @@
 ---
+import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
+import { getCollection } from "astro:content";
 
-// Clip path comes from https://codepen.io/BillyHill/pen/xBvKpE
+const posts = await getCollection("posts");
+
+const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
+  month: "long",
+  year: "numeric",
+});
 ---
 
 <Layout title="Montagne">
@@ -106,47 +112,45 @@ import Card from "../components/Card.astro";
           class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 grid-flow-row-dense gap-6 mt-24"
         >
           {
-            Array.from({ length: 12 }).map((_, index) => (
+            posts.map((post) => (
               <article
                 class:list={[
-                  "border-4 border-slate-900 bg-white hover:bg-slate-50 transition",
-                  index % 3 === 0
+                  "relative border-4 border-slate-900 bg-white hover:bg-slate-50 transition",
+                  post.data.type === "voyage"
                     ? "grid grid-rows-2 grid-cols-1 md:col-span-2 md:grid-rows-1 md:grid-cols-2"
                     : "",
                 ]}
               >
                 <div class="p-4 flex flex-col gap-y-4 h-full">
                   <p class="font-medium px-2 py-1 self-start text-slate-50 bg-slate-900">
-                    {index % 3 === 0 ? "Voyage" : "Note"}
+                    {post.data.type === "voyage" ? "Voyage" : "Note"}
                   </p>
 
                   <h3 class="text-2xl font-semibold leading-snug text-slate-900 line-clamp-2">
-                    Trek autour des glaciers de la Vanoise (août 2024)
+                    {post.data.title}
                   </h3>
 
                   <p class="text-slate-800 line-clamp-3 text-lg">
-                    Progressive Web Apps (PWAs) are now a viable option for
-                    providing a mobile experience that meets users’ high
-                    expectations. This article provides an introduction to the
-                    history of PWAs for those new to the topic, as well as what
-                    can be expected from them in 2024. We also look at where
-                    PWAs sit in the mobile landscape and how they can be a
-                    practical stepping stone towards a native application
-                    experience in the future.
+                    {post.data.description}
                   </p>
 
-                  <p class="text-slate-800 flex grow items-end font-semibold text-sm">
-                    Août 2024
+                  <p class="text-slate-800 flex grow items-end font-semibold text-sm capitalize">
+                    {dateFormatter.format(post.data.createdAt)}
                   </p>
                 </div>
 
-                {index % 3 === 0 ? (
-                  <img
-                    src="/approche-glacier.jpeg"
+                {post.data.type === "voyage" &&
+                post.data.primaryImage !== undefined ? (
+                  <Image
+                    src={post.data.primaryImage}
                     alt=""
                     class="object-cover object-right-bottom bg-white h-full"
                   />
                 ) : null}
+
+                <a href={`/posts/${post.slug}`} class="absolute inset-0">
+                  <span class="sr-only">Voir le post</span>
+                </a>
               </article>
             ))
           }
