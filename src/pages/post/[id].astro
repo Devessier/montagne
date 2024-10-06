@@ -1,0 +1,40 @@
+---
+import type {
+  InferGetStaticParamsType,
+  InferGetStaticPropsType,
+  GetStaticPaths,
+} from "astro";
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+export const getStaticPaths = (async () => {
+  const posts = await getCollection("posts");
+
+  return posts.map((entry) => ({
+    params: { id: entry.slug },
+    props: { entry },
+  }));
+}) satisfies GetStaticPaths;
+
+const { id } = Astro.params;
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+// rgb(247,221,207) rgb(247,210,194)
+// rgb(200,173,182)
+// rgb(119,144,167) rgb(144,152,176)
+---
+
+<Layout title="Post">
+  <nav class="">
+    <div class="px-4 py-6">
+      <p class="text-3xl font-semibold text-center">
+        <a href="/">Montagne</a>
+      </p>
+    </div>
+  </nav>
+
+  <main class="bg-slate-50">
+    <Content />
+  </main>
+</Layout>

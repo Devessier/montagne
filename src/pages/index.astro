@@ -18,23 +18,23 @@ const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
       style="background-image: url('/approche-glacier.jpeg');"
     >
       <div
-        class="self-center lg:self-end px-4 py-4 lg:p-0 justify-self-center lg:justify-self-start flex flex-col items-start lg:pb-12 lg:pl-12 lg:mr-8 [&>*]:-mb-[8px] [&>*]:last:mb-0"
+        class="self-center lg:self-end px-4 py-4 lg:p-0 justify-self-center lg:justify-self-start flex flex-col items-start lg:pb-12 lg:pl-12 lg:mr-8 [&>*]:-mb-[4px] [&>*]:last:mb-0"
       >
         <h2
-          class="font-semibold text-slate-900 text-3xl lg:text-5xl bg-white p-4 md:py-4 md:px-6 border-8 border-slate-900 mr-4 text-balance"
+          class="font-semibold text-slate-900 text-3xl lg:text-5xl bg-white p-4 md:py-4 md:px-6 border-4 border-slate-900 mr-4 text-balance"
         >
           Mes aventures en montagne
         </h2>
 
         <p
-          class="text-slate-900 lg:text-lg font-medium bg-white p-4 md:py-4 md:px-6 border-8 border-slate-900 text-balance"
+          class="text-slate-900 lg:text-lg font-medium bg-white p-4 md:py-4 md:px-6 border-4 border-slate-900 text-balance"
         >
           Randonnée. Escalade. Alpinisme. Mon carnet de voyage en montagne.
         </p>
 
         <a
           href="#journal"
-          class="inline-flex items-center gap-x-2 self-end p-4 md:py-4 md:px-6 bg-white border-8 border-slate-900 font-medium"
+          class="inline-flex items-center gap-x-2 self-end p-4 md:py-4 md:px-6 bg-white border-4 border-slate-900 font-medium"
         >
           Découvrir
 
@@ -55,7 +55,7 @@ const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
       </div>
 
       <div
-        class="self-end lg:self-auto lg:justify-self-end grid grid-rows-1 grid-cols-[1fr,auto] lg:grid-rows-[1fr,auto] lg:grid-cols-[min-content] border-t-8 lg:border-0 lg:border-l-8 border-slate-900"
+        class="self-end lg:self-auto lg:justify-self-end grid grid-rows-1 grid-cols-[1fr,auto] lg:grid-rows-[1fr,auto] lg:grid-cols-[min-content] border-t-4 lg:border-0 lg:border-l-4 border-slate-900"
       >
         <div
           class="bg-right-bottom bg-cover bg-white"
@@ -64,7 +64,7 @@ const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
         </div>
 
         <p
-          class="lg:[writing-mode:vertical-lr] max-h-fit lg:rotate-180 bg-white text-slate-900 px-4 py-4 md:px-6 lg:px-8 md:py-6 lg:py-10 text-lg lg:text-xl font-bold lg:border-b-8 border-slate-900 uppercase tracking-wide lg:tracking-widest"
+          class="lg:[writing-mode:vertical-lr] max-h-fit lg:rotate-180 bg-white text-slate-900 px-4 py-4 md:px-6 lg:px-8 md:py-6 lg:py-10 text-lg lg:text-xl font-bold lg:border-b-4 border-slate-900 uppercase tracking-wide lg:tracking-widest"
         >
           Baptiste Devessier
 
@@ -75,34 +75,34 @@ const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
 
     <section
       id="journal"
-      class="border-t-8 border-slate-900 pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]"
+      class="border-t-4 border-slate-900 pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]"
     >
       <div class="mx-auto max-w-7xl px-4 pb-16 flex flex-col">
         <div
           class="grid [grid-template-areas:'image1'_'title'_'image2'] lg:[grid-template-areas:'image1_image1_._._.'_'._title_title_title_.'_'._._._image2_image2'] lg:grid-cols-[1fr,2rem,1fr,2rem,1fr] py-16"
         >
           <div
-            class="bg-center bg-cover bg-white border-8 border-slate-900 h-32 lg:h-44"
+            class="bg-center bg-cover bg-white border-4 border-slate-900 h-32 lg:h-44"
             style="grid-area: image1; background-image: url('/glacier-face-italie.jpeg');"
           >
           </div>
 
           <h2
-            class="text-4xl lg:text-6xl font-bold text-center text-slate-900 border-y-8 border-slate-900 py-4 -my-[8px]"
+            class="text-4xl lg:text-6xl font-bold text-center text-slate-900 border-y-4 border-slate-900 py-4 -my-[4px]"
             style="grid-area: title;"
           >
             Journal
           </h2>
 
           <div
-            class="bg-top bg-cover bg-white border-8 border-slate-900 h-32 lg:h-44"
+            class="bg-top bg-cover bg-white border-4 border-slate-900 h-32 lg:h-44"
             style="grid-area: image2; background-image: url('/vallee-chaviere-moriond.jpeg');"
           >
           </div>
         </div>
 
         <p
-          class="text-slate-900 text-center text-xl mx-auto w-full max-w-lg font-medium mt-8 border-x-[6px] border-slate-900 px-4 py-4"
+          class="text-slate-900 text-center text-xl mx-auto w-full max-w-lg font-medium mt-8 border-x-6 border-slate-900 px-4 py-4"
         >
           Je documente ma découverte de ces nouveaux espaces pour garder une
           trace de mon évolution.
@@ -148,7 +148,7 @@ const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
                   />
                 ) : null}
 
-                <a href={`/posts/${post.slug}`} class="absolute inset-0">
+                <a href={`/post/${post.slug}`} class="absolute inset-0">
                   <span class="sr-only">Voir le post</span>
                 </a>
               </article>
