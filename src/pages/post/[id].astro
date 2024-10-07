@@ -6,6 +6,8 @@ import type {
 } from "astro";
 import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import PostTypeBadge from "../../components/PostTypeBadge.astro";
 
 export const getStaticPaths = (async () => {
   const posts = await getCollection("posts");
@@ -16,25 +18,82 @@ export const getStaticPaths = (async () => {
   }));
 }) satisfies GetStaticPaths;
 
-const { id } = Astro.params;
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 
-// rgb(247,221,207) rgb(247,210,194)
-// rgb(200,173,182)
-// rgb(119,144,167) rgb(144,152,176)
+const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
 ---
 
 <Layout title="Post">
   <nav class="">
-    <div class="px-4 py-6">
-      <p class="text-3xl font-semibold text-center">
-        <a href="/">Montagne</a>
+    <div class="px-4 py-6 border-b-2 border-slate-900">
+      <p class="text-4xl font-semibold text-center tracking-wider">
+        <a href="/" class="inline-flex flex-col gap-y-0.5">
+          montagne
+          <span class="text-xs">Par Baptiste Devessier</span>
+        </a>
       </p>
     </div>
   </nav>
 
-  <main class="bg-slate-50">
-    <Content />
+  <main class="bg-slate-50 mt-12">
+    <article>
+      <header class="px-2 flex flex-col items-center pb-10">
+        <a
+          href="/"
+          class="inline-flex items-center hover:underline font-medium text-sm mb-8"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-5 mr-1"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18"></path>
+          </svg>
+
+          Retourner à l'accueil
+        </a>
+
+        <PostTypeBadge type={entry.data.type} size="sm" />
+
+        <h1
+          class="text-5xl font-semibold max-w-5xl mx-auto text-center tracking-wider text-balance mt-4 mb-4"
+        >
+          {entry.data.title}
+        </h1>
+
+        <time
+          datetime={entry.data.createdAt.toISOString()}
+          class="text-slate-800 font-semibold text-sm capitalize"
+        >
+          {dateFormatter.format(entry.data.createdAt)}
+        </time>
+      </header>
+
+      {
+        entry.data.primaryImage !== undefined &&
+        entry.data.primaryImageAlt !== undefined ? (
+          <Image
+            src={entry.data.primaryImage}
+            alt={entry.data.primaryImageAlt}
+            class="w-full aspect-video object-center"
+          />
+        ) : null
+      }
+
+      <div class="mx-auto prose prose-lg prose-slate pt-10 px-2">
+        <Content />
+      </div>
+    </article>
   </main>
 </Layout>

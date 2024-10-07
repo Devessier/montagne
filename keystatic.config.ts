@@ -11,16 +11,27 @@ export default config({
       path: "src/content/posts/*",
       format: { contentField: "content" },
       schema: {
-        title: fields.slug({ name: { label: "Title" } }),
+        title: fields.slug({ name: { label: "Titre" } }),
         description: fields.text({ label: "Description" }),
-        content: fields.markdoc({ label: "Content" }),
+        content: fields.markdoc({
+          label: "Contenu",
+          options: {
+            image: {
+              directory: "src/assets/images/posts",
+              publicPath: "/src/assets/images/posts/",
+            },
+          },
+        }),
         primaryImage: fields.image({
           label: "Image principale",
           directory: "src/assets/images/posts",
-          publicPath: '/src/assets/images/posts/',
+          publicPath: "/src/assets/images/posts/",
+        }),
+        primaryImageAlt: fields.text({
+          label: "Image principale — texte alternatif",
         }),
         createdAt: fields.datetime({
-          label: "Created at",
+          label: "Date de création",
           defaultValue: { kind: "now" },
         }),
         type: fields.select({

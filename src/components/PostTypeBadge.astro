@@ -1,0 +1,17 @@
+---
+interface Props {
+  type: "voyage" | "note";
+  size?: "base" | "sm";
+  class?: string;
+}
+---
+
+<span
+  class:list={[
+    "inline-block font-medium text-slate-50 bg-slate-900",
+    Astro.props.size === "sm" ? "px-1.5 py-0.5 text-sm" : "px-2 py-1 text-base",
+    Astro.props.class,
+  ]}
+>
+  {Astro.props.type === "voyage" ? "Voyage" : "Note"}
+</span>
