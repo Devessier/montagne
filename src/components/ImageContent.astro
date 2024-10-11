@@ -18,4 +18,9 @@ if (result === undefined) {
 const matchingResolvedImage = result[1];
 ---
 
-<Image {...Astro.props} src={matchingResolvedImage()} />
+<Image
+  {...Astro.props}
+  src={matchingResolvedImage()}
+  widths={[800, 1200]}
+  sizes="(max-width: 800px) 100vw, 800px"
+/>
