@@ -1,9 +1,5 @@
 ---
-import type {
-  InferGetStaticParamsType,
-  InferGetStaticPropsType,
-  GetStaticPaths,
-} from "astro";
+import type { GetStaticPaths } from "astro";
 import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
@@ -86,6 +82,8 @@ const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
           <Image
             src={entry.data.primaryImage}
             alt={entry.data.primaryImageAlt}
+            widths={[800, 1200, 2400]}
+            sizes="100vw"
             class="w-full aspect-video object-center"
           />
         ) : null
