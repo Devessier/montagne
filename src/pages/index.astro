@@ -1,8 +1,12 @@
 ---
-import { Image } from "astro:assets";
+import { getImage, Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import PostTypeBadge from "../components/PostTypeBadge.astro";
+
+import firstImage from "../assets/glacier-face-italie.jpeg";
+import secondImage from "../assets/vallee-chaviere-moriond.jpeg";
+import bgImage from "../assets/approche-glacier.jpeg";
 
 const posts = await getCollection("posts");
 
@@ -16,11 +20,21 @@ const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
 <Layout title="Montagne">
   <main class="bg-slate-50">
     <div
-      class="grid grid-rows-[1fr,auto] grid-cols-1 lg:grid-rows-1 lg:grid-cols-[1fr,auto] min-h-svh overflow-hidden bg-cover bg-center"
-      style="background-image: url('/approche-glacier.jpeg');"
+      class="grid grid-rows-[1fr,auto] grid-cols-1 lg:grid-rows-1 lg:grid-cols-[1fr,auto] min-h-svh overflow-hidden relative"
+      style={`background-image: url('${bgImage.src}');`}
     >
+      <div class="absolute inset-0 z-0">
+        <Image
+          src={bgImage}
+          alt=""
+          widths={[800, 1200, 2400]}
+          sizes="(max-width: 768px): 800px, (max-width: 1280px): 1200px, 2400px"
+          class="object-cover object-center h-full"
+        />
+      </div>
+
       <div
-        class="self-center lg:self-end px-4 py-4 lg:p-0 justify-self-center lg:justify-self-start flex flex-col items-start lg:pb-12 lg:pl-12 lg:mr-8 [&>*]:-mb-[4px] [&>*]:last:mb-0"
+        class="z-10 self-center lg:self-end px-4 py-4 lg:p-0 justify-self-center lg:justify-self-start flex flex-col items-start lg:pb-12 lg:pl-12 lg:mr-8 [&>*]:-mb-[4px] [&>*]:last:mb-0"
       >
         <h2
           class="font-semibold text-slate-900 text-3xl lg:text-5xl bg-white p-4 md:py-4 md:px-6 border-4 border-slate-900 mr-4 text-balance"
@@ -57,13 +71,15 @@ const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
       </div>
 
       <div
-        class="self-end lg:self-auto lg:justify-self-end grid grid-rows-1 grid-cols-[1fr,auto] lg:grid-rows-[1fr,auto] lg:grid-cols-[min-content] border-t-4 lg:border-0 lg:border-l-4 border-slate-900"
+        class="z-10 self-end lg:self-auto lg:justify-self-end grid grid-rows-1 grid-cols-[1fr,auto] lg:grid-rows-[1fr,auto] lg:grid-cols-[min-content] border-t-4 lg:border-0 lg:border-l-4 border-slate-900"
       >
-        <div
-          class="bg-right-bottom bg-cover bg-white"
-          style="background-image: url('/approche-glacier.jpeg');"
-        >
-        </div>
+        <Image
+          src={bgImage}
+          alt=""
+          widths={[800, 1200, 2400]}
+          sizes="(max-width: 768px): 800px, (max-width: 1280px): 1200px, 2400px"
+          class="object-cover object-right-bottom h-full"
+        />
 
         <p
           class="lg:[writing-mode:vertical-lr] max-h-fit lg:rotate-180 bg-white text-slate-900 px-4 py-4 md:px-6 lg:px-8 md:py-6 lg:py-10 text-lg lg:text-xl font-bold lg:border-b-4 border-slate-900 uppercase tracking-wide lg:tracking-widest"
@@ -83,11 +99,14 @@ const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
         <div
           class="grid [grid-template-areas:'image1'_'title'_'image2'] lg:[grid-template-areas:'image1_image1_._._.'_'._title_title_title_.'_'._._._image2_image2'] lg:grid-cols-[1fr,2rem,1fr,2rem,1fr] py-16"
         >
-          <div
-            class="bg-center bg-cover bg-white border-4 border-slate-900 h-32 lg:h-44"
-            style="grid-area: image1; background-image: url('/glacier-face-italie.jpeg');"
-          >
-          </div>
+          <Image
+            src={firstImage}
+            alt=""
+            widths={[600, 800]}
+            sizes="(max-width: 768px) 600px, 800px"
+            class="object-center object-cover bg-white border-4 border-slate-900 h-32 lg:h-44"
+            style="grid-area: image1"
+          />
 
           <h2
             class="text-4xl lg:text-6xl font-bold text-center text-slate-900 border-y-4 border-slate-900 py-4 -my-[4px]"
@@ -96,11 +115,14 @@ const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
             Journal
           </h2>
 
-          <div
-            class="bg-top bg-cover bg-white border-4 border-slate-900 h-32 lg:h-44"
-            style="grid-area: image2; background-image: url('/vallee-chaviere-moriond.jpeg');"
-          >
-          </div>
+          <Image
+            src={secondImage}
+            alt=""
+            widths={[600, 800]}
+            sizes="(max-width: 768px) 600px, 800px"
+            class="object-top object-cover bg-white border-4 border-slate-900 h-32 lg:h-44"
+            style="grid-area: image2"
+          />
         </div>
 
         <p
@@ -130,9 +152,7 @@ const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
                     {post.data.title}
                   </h3>
 
-                  <p class="text-slate-800 text-lg">
-                    {post.data.description}
-                  </p>
+                  <p class="text-slate-800 text-lg">{post.data.description}</p>
 
                   <time
                     datetime={post.data.createdAt.toISOString()}
@@ -147,6 +167,7 @@ const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
                   <Image
                     src={post.data.primaryImage}
                     alt=""
+                    widths={[800]}
                     class="object-cover object-right-bottom bg-white h-full"
                   />
                 ) : null}
