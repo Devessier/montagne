@@ -1,0 +1,21 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
+interface Props extends HTMLImageElement {}
+
+const allContentImages = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/images/posts/**/*.{jpg,jpeg,png}"
+);
+
+const result = Object.entries(allContentImages).find(([path]) => {
+  return Astro.props.src.slice(5) === path.slice(5);
+});
+if (result === undefined) {
+  throw new Error("Couldn't find the image");
+}
+
+const matchingResolvedImage = result[1];
+---
+
+<Image {...Astro.props} src={matchingResolvedImage()} />
