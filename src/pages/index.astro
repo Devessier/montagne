@@ -73,13 +73,15 @@ const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
       <div
         class="z-10 self-end lg:self-auto lg:justify-self-end grid grid-rows-1 grid-cols-[1fr,auto] lg:grid-rows-[1fr,auto] lg:grid-cols-[min-content] border-t-4 lg:border-0 lg:border-l-4 border-slate-900"
       >
-        <Image
-          src={bgImage}
-          alt=""
-          widths={[800, 1200, 2400]}
-          sizes="100vw"
-          class="object-cover object-right-bottom h-full"
-        />
+        <div class="relative">
+          <Image
+            src={bgImage}
+            alt=""
+            widths={[800, 1200, 2400]}
+            sizes="100vw"
+            class="absolute inset-0 object-cover object-right-bottom h-full w-full"
+          />
+        </div>
 
         <p
           class="lg:[writing-mode:vertical-lr] max-h-fit lg:rotate-180 bg-white text-slate-900 px-4 py-4 md:px-6 lg:px-8 md:py-6 lg:py-10 text-lg lg:text-xl font-bold lg:border-b-4 border-slate-900 uppercase tracking-wide lg:tracking-widest"
@@ -141,7 +143,7 @@ const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
                 class:list={[
                   "relative border-4 border-slate-900 bg-white hover:bg-slate-50 transition",
                   post.data.type === "voyage"
-                    ? "grid grid-rows-2 grid-cols-1 md:col-span-2 md:grid-rows-1 md:grid-cols-2"
+                    ? "grid grid-flow-row grid-cols-1 md:col-span-2 md:grid-rows-1 md:grid-cols-2"
                     : "",
                 ]}
               >
