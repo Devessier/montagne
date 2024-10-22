@@ -134,19 +134,10 @@ const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
           trace de mon évolution.
         </p>
 
-        <div
-          class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 grid-flow-row-dense gap-6 mt-24"
-        >
+        <div class="grid grid-cols-1 auto-rows-fr gap-6 mt-24">
           {
             posts.map((post) => (
-              <article
-                class:list={[
-                  "relative border-4 border-slate-900 bg-white hover:bg-slate-50 transition",
-                  post.data.type === "voyage"
-                    ? "grid grid-flow-row grid-cols-1 md:col-span-2 md:grid-rows-1 md:grid-cols-2"
-                    : "",
-                ]}
-              >
+              <article class="relative border-4 border-slate-900 bg-white hover:bg-slate-50 transition grid grid-cols-1 md:grid-rows-1 md:grid-cols-2">
                 <div class="p-4 flex flex-col gap-y-4 h-full">
                   <PostTypeBadge type={post.data.type} class="self-start" />
 
@@ -158,22 +149,21 @@ const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
 
                   <time
                     datetime={post.data.createdAt.toISOString()}
-                    class="text-slate-800 flex grow items-end font-semibold text-sm capitalize"
+                    class="text-slate-800 flex grow items-end font-semibold capitalize"
                   >
                     {dateFormatter.format(post.data.createdAt)}
                   </time>
                 </div>
 
-                {post.data.type === "voyage" &&
-                post.data.primaryImage !== undefined ? (
+                <div>
                   <Image
                     src={post.data.primaryImage}
                     alt=""
                     widths={[800]}
                     sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 30vw"
-                    class="object-cover object-right-bottom bg-white h-full"
+                    class="object-cover object-right-bottom bg-white h-full aspect-[16/9]"
                   />
-                ) : null}
+                </div>
 
                 <a href={`/post/${post.slug}`} class="absolute inset-0">
                   <span class="sr-only">Voir le post</span>
