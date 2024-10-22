@@ -5,8 +5,8 @@ export default config({
     kind: "github",
     repo: {
       owner: "Devessier",
-      name: "montagne"
-    }
+      name: "montagne",
+    },
   },
   collections: {
     posts: collection({
@@ -16,7 +16,12 @@ export default config({
       format: { contentField: "content" },
       schema: {
         title: fields.slug({ name: { label: "Titre" } }),
-        description: fields.text({ label: "Description" }),
+        description: fields.text({
+          label: "Description",
+          validation: {
+            isRequired: true,
+          },
+        }),
         content: fields.markdoc({
           label: "Contenu",
           options: {
@@ -30,13 +35,22 @@ export default config({
           label: "Image principale",
           directory: "src/assets/images/posts",
           publicPath: "/src/assets/images/posts/",
+          validation: {
+            isRequired: true,
+          },
         }),
         primaryImageAlt: fields.text({
           label: "Image principale — texte alternatif",
+          validation: {
+            isRequired: true,
+          },
         }),
         createdAt: fields.datetime({
           label: "Date de création",
           defaultValue: { kind: "now" },
+          validation: {
+            isRequired: true,
+          },
         }),
         type: fields.select({
           label: "Type",

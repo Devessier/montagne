@@ -5,8 +5,8 @@ const postCollection = defineCollection({
     schema: ({ image }) => z.object({
         title: z.string(),
         description: z.string(),
-        primaryImage: image().optional(),
-        primaryImageAlt: z.string().optional(),
+        primaryImage: image(),
+        primaryImageAlt: z.string(),
         createdAt: z.date(),
         type:  z.enum(['voyage', 'note'])
     })
