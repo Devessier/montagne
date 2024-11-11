@@ -8,7 +8,10 @@ import firstImage from "../assets/glacier-face-italie.jpeg";
 import secondImage from "../assets/vallee-chaviere-moriond.jpeg";
 import bgImage from "../assets/approche-glacier.jpeg";
 
-const posts = await getCollection("posts");
+const allPosts = await getCollection("posts");
+const posts = allPosts.sort(
+  (a, b) => Number(b.data.createdAt) - Number(a.data.createdAt)
+);
 
 const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
   day: "numeric",
