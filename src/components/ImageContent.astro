@@ -12,7 +12,7 @@ const allContentImages = import.meta.glob<{ default: ImageMetadata }>(
 );
 
 const result = Object.entries(allContentImages).find(([path]) => {
-  return Astro.props.src.slice(5) === path.slice(5);
+  return decodeURIComponent(Astro.props.src.slice(5)) === path.slice(5);
 });
 if (result === undefined) {
   throw new Error("Couldn't find the image");
