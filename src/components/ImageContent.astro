@@ -21,9 +21,15 @@ if (result === undefined) {
 const matchingResolvedImage = result[1];
 ---
 
-<Image
-  {...Astro.props}
-  src={matchingResolvedImage()}
-  widths={[800, 1200]}
-  sizes="(max-width: 900px) 100vw, 900px"
-/>
+<figure>
+  <Image
+    src={matchingResolvedImage()}
+    alt={Astro.props.alt}
+    widths={[800, 1200]}
+    sizes="(max-width: 900px) 100vw, 900px"
+  />
+
+  <figcaption>
+    {Astro.props.alt}
+  </figcaption>
+</figure>
