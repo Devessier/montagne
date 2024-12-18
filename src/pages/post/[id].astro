@@ -79,19 +79,23 @@ const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
       {
         entry.data.primaryImage !== undefined &&
         entry.data.primaryImageAlt !== undefined ? (
-          <Image
-            src={entry.data.primaryImage}
-            alt={entry.data.primaryImageAlt}
-            widths={[800, 1200, 2400]}
-            sizes="100vw"
-            class="w-full aspect-video object-center object-cover"
-          />
+          <figure class="relative">
+            <Image
+              src={entry.data.primaryImage}
+              alt={entry.data.primaryImageAlt}
+              widths={[800, 1200, 2400]}
+              sizes="100vw"
+              class="w-full aspect-video object-center object-cover"
+            />
+
+            <figcaption class="md:absolute md:bottom-0 md:right-0 md:bg-slate-50/80 text-slate-900 px-2 py-1">
+              {entry.data.primaryImageAlt}
+            </figcaption>
+          </figure>
         ) : null
       }
 
-      <div
-        class="mx-auto prose prose-lg prose-slate pt-10 px-4 break-words"
-      >
+      <div class="mx-auto prose prose-lg prose-slate pt-10 px-4 break-words">
         <Content />
       </div>
     </article>
