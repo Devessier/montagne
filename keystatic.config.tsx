@@ -41,8 +41,9 @@ export default config({
                   return null;
                 }
 
-                // @ts-expect-error src.data is a Uint8Array
-                const blob = new Blob([src.data], { type: "video/mp4" });
+                const blob = new Blob([src.data as BlobPart], {
+                  type: "video/mp4",
+                });
 
                 const url = URL.createObjectURL(blob);
 
