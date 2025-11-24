@@ -28,8 +28,8 @@ export default config({
           label: "Contenu",
           options: {
             image: {
-              directory: "src/assets/images/posts",
-              publicPath: "/src/assets/images/posts/",
+              directory: "public/videos",
+              publicPath: "/videos/",
             },
           },
           components: {
