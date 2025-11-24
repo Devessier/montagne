@@ -28,8 +28,8 @@ export default config({
           label: "Contenu",
           options: {
             image: {
-              directory: "public/videos",
-              publicPath: "/videos/",
+              directory: "src/assets/images/posts",
+              publicPath: "/src/assets/images/posts/",
             },
           },
           components: {
@@ -60,8 +60,8 @@ export default config({
                 src: fields.file({
                   label: "Video file",
                   description: "Select a video file",
-                  directory: "src/assets/images/posts",
-                  publicPath: "/src/assets/images/posts/",
+                  directory: "public/videos",
+                  publicPath: "/videos/",
                 }),
                 controls: fields.checkbox({
                   label: "Controls",
