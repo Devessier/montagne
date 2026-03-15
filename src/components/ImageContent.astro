@@ -1,6 +1,6 @@
 ---
 import type { ImageMetadata } from "astro";
-import { Image } from "astro:assets";
+import { Image, getImage } from "astro:assets";
 
 interface Props {
   src: string;
@@ -19,15 +19,26 @@ if (result === undefined) {
 }
 
 const matchingResolvedImage = result[1];
+const resolved = await matchingResolvedImage();
+const fullSizeImage = await getImage({ src: resolved.default, width: 2400 });
 ---
 
 <figure>
-  <Image
-    src={matchingResolvedImage()}
-    alt={Astro.props.alt}
-    widths={[800, 1200]}
-    sizes="(max-width: 900px) 100vw, 900px"
-  />
+  <a
+    class="lightbox cursor-pointer"
+    href={fullSizeImage.src}
+    data-pswp-width={fullSizeImage.attributes.width}
+    data-pswp-height={fullSizeImage.attributes.height}
+    target="_blank"
+  >
+    <Image
+      src={matchingResolvedImage()}
+      alt={Astro.props.alt}
+      widths={[800, 1200]}
+      sizes="(max-width: 900px) 100vw, 900px"
+      class="m-0"
+    />
+  </a>
 
   <figcaption>
     {Astro.props.alt}

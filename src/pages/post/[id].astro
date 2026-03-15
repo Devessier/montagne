@@ -95,9 +95,30 @@ const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
         ) : null
       }
 
-      <div class="mx-auto prose prose-lg prose-slate pt-10 px-4 break-words">
+      <div class="mx-auto prose prose-lg prose-slate pt-10 px-4 break-words w-[800px] max-w-none" id="article-content">
         <Content />
       </div>
     </article>
   </main>
 </Layout>
+
+<style>
+  #article-content :global(a.lightbox) {
+    text-decoration: none;
+    border: none;
+    box-shadow: none;
+    color: inherit;
+  }
+</style>
+
+<script>
+  import PhotoSwipeLightbox from "photoswipe/lightbox";
+  import "photoswipe/style.css";
+
+  const lightbox = new PhotoSwipeLightbox({
+    gallery: "#article-content",
+    children: "a.lightbox",
+    pswpModule: () => import("photoswipe"),
+  });
+  lightbox.init();
+</script>
