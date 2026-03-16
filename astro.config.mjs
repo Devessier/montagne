@@ -13,6 +13,7 @@ import netlify from '@astrojs/netlify';
 export default defineConfig({
   integrations: [react(), markdoc(), keystatic()],
   vite: {
+    // @ts-expect-error Vite version mismatch between @tailwindcss/vite and astro
     plugins: [tailwindcss()],
   },
   output: 'hybrid',
