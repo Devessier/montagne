@@ -1,7 +1,7 @@
 ---
 import type { GetStaticPaths } from "astro";
 import Layout from "../../layouts/Layout.astro";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import { Image } from "astro:assets";
 import PostTypeBadge from "../../components/PostTypeBadge.astro";
 
@@ -9,13 +9,13 @@ export const getStaticPaths = (async () => {
   const posts = await getCollection("posts");
 
   return posts.map((entry) => ({
-    params: { id: entry.slug },
+    params: { id: entry.id },
     props: { entry },
   }));
 }) satisfies GetStaticPaths;
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 
 const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
   day: "numeric",
