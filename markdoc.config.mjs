@@ -27,6 +27,10 @@ export default defineMarkdocConfig({
           type: Boolean,
           required: false,
         },
+        description: {
+          type: String,
+          required: false,
+        },
       },
     },
   },

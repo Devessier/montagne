@@ -36,7 +36,9 @@ export default config({
             video: block({
               label: "Video",
               description: "Upload a video",
-              ContentView: ({ value: { src, autoplay, controls, loop } }) => {
+              ContentView: ({
+                value: { src, autoplay, controls, loop, description },
+              }) => {
                 if (src === null) {
                   return null;
                 }
@@ -48,12 +50,17 @@ export default config({
                 const url = URL.createObjectURL(blob);
 
                 return (
-                  <VideoPlayer
-                    src={url}
-                    autoPlay={autoplay}
-                    controls={controls}
-                    loop={loop}
-                  />
+                  <figure>
+                    <VideoPlayer
+                      src={url}
+                      autoPlay={autoplay}
+                      controls={controls}
+                      loop={loop}
+                    />
+                    {description ? (
+                      <figcaption>{description}</figcaption>
+                    ) : null}
+                  </figure>
                 );
               },
               schema: {
@@ -77,6 +84,10 @@ export default config({
                   label: "Loop",
                   description: "Enable looping",
                   defaultValue: false,
+                }),
+                description: fields.text({
+                  label: "Description",
+                  description: "Caption displayed below the video",
                 }),
               },
             }),
