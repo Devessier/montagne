@@ -2,6 +2,34 @@ import { config, fields, collection } from "@keystatic/core";
 import { block } from "@keystatic/core/content-components";
 import VideoPlayer from "./src/components/VideoPlayer";
 
+/**
+ * Sanitizes an uploaded filename so it is safe to commit to Git and reference
+ * from Markdoc. Spaces, parentheses and non-ASCII characters (e.g. accents)
+ * otherwise produce paths that break Keystatic's GitHub save round-trip with
+ * "A path was requested for deletion which does not exist".
+ */
+function sanitizeFilename(originalFilename: string): string {
+  const lastDot = originalFilename.lastIndexOf(".");
+  const hasExtension = lastDot > 0;
+  const name = hasExtension
+    ? originalFilename.slice(0, lastDot)
+    : originalFilename;
+  const extension = hasExtension
+    ? originalFilename.slice(lastDot + 1).toLowerCase()
+    : "";
+
+  const cleanName = name
+    .normalize("NFKD") // split accented letters into base letter + diacritic
+    .replace(/[\u0300-\u036f]/g, "") // drop the diacritics (é -> e)
+    .replace(/[^a-zA-Z0-9]+/g, "-") // any other unsafe char -> single dash
+    .replace(/^-+|-+$/g, "") // trim leading/trailing dashes
+    .toLowerCase();
+
+  const safeName = cleanName || "file";
+
+  return extension ? `${safeName}.${extension}` : safeName;
+}
+
 export default config({
   storage: {
     kind: "github",
@@ -30,6 +58,7 @@ export default config({
             image: {
               directory: "src/assets/images/posts",
               publicPath: "/src/assets/images/posts/",
+              transformFilename: sanitizeFilename,
             },
           },
           components: {
@@ -69,6 +98,7 @@ export default config({
                   description: "Select a video file",
                   directory: "public/videos",
                   publicPath: "/videos/",
+                  transformFilename: sanitizeFilename,
                 }),
                 controls: fields.checkbox({
                   label: "Controls",
@@ -97,6 +127,7 @@ export default config({
           label: "Image principale",
           directory: "src/assets/images/posts",
           publicPath: "/src/assets/images/posts/",
+          transformFilename: sanitizeFilename,
           validation: {
             isRequired: true,
           },
